@@ -46,8 +46,10 @@ void loop()
 
   if(!one) timeOne = millis(); 
   if(!two) timeTwo = millis();
-
-  if((timeOne || timeTwo) && abs(timeOne - timeTwo) <= 500)
+  bool beenPressed = timeOne || timeTwo;
+  unsigned long butTimeDif = abs(timeOne - timeTwo);
+  
+  if(beenPressed && butTimeDif  <= 500)
   {
     digitalWrite(LED_PIN, HIGH);
     while(1);
