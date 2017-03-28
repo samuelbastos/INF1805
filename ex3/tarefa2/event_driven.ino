@@ -1,6 +1,13 @@
 #include "tarefa2.h"
 
 unsigned long timer;
+int pastValue[2];
+unsigned long timeOne;
+unsigned long timeTwo;
+int oneFlag;
+int twoFlag;
+unsigned long limit;
+bool even;
 
 /* Funções de registro: */
 void button_listen (int pin) 
@@ -16,24 +23,27 @@ void timer_set (int ms)
 /* Programa principal: */
 void setup ()
 {
- init(); // inicialização do usuário
+  init_listener(); // inicialização do usuário
+  pastValue[0] = 0;
+  pastValue[1] = 0;
+  timeOne = 0;
+  timeTwo = 0;
+  oneFlag = 1;
+  twoFlag = 1;
+  limit = 1000;
+  even = true;
 }
 
 void loop () 
 {
- int one = digitalRead(BUT_PIN1);
- int two = digitalRead(BUT_PIN2);
-
- if(lastClicked == BUT_PIN1) digitalWrite(LED_PIN, two);
- else digitalWrite(LED_PIN, one);
-
   unsigned long actual = millis();
-  unsigned long dif = actual - time;  
+  unsigned long dif = actual - timer;  
   unsigned limitDif;
   
   if(dif >= limit)
   {
-    time = actual;
+    timer_set(actual);
+    timer_expired();
     
     if(even) digitalWrite(LED_PIN, HIGH);
    
@@ -41,21 +51,25 @@ void loop ()
  
     even = !even;
   }
+ 
+  int one = digitalRead(BUT_PIN1);
+  int two = digitalRead(BUT_PIN2);
+
+  if(!one) timeOne = millis(); 
+  if(!two) timeTwo = millis();
+  bool beenPressed = timeOne || timeTwo;
+  unsigned long butTimeDif = abs(timeOne - timeTwo);
   
- if(!one)
- {
-  if(lastClicked == BUT_PIN2) 
+  if(beenPressed && butTimeDif  <= 500)
   {
-    button_changed(BUT_PIN1, BUT_PIN2);
+    digitalWrite(LED_PIN, HIGH);
+    while(1);
   }
-  lastClicked = BUT_PIN1;
- }
- if(!two)
- {
-  if(lastClicked == BUT_PIN1) 
-  {
-    button_changed(BUT_PIN2, BUT_PIN1);
-  }
-  lastClicked = BUT_PIN2;
- }
+  
+  if(one && !oneFlag) limit += 100;
+  if(two && !twoFlag) limit -= 100;
+
+  oneFlag = one;
+  twoFlag = two;
+
 }
