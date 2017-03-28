@@ -24,8 +24,6 @@ void setup ()
 
 void loop () 
 {
- int i;
- 
  int one = digitalRead(BUT_PIN1);
  int two = digitalRead(BUT_PIN2);
   
