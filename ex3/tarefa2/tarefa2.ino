@@ -1,17 +1,35 @@
 #include "event_driven.h"
 #include "tarefa2.h"
 
-void button_changed(int pin, int v)
+void button_changed(int pin)
 {
-  Serial.print("Button: ");
-  Serial.print(pin);
-  Serial.print("New button: ");
-  Serial.println(v);
+  if(pin == BUT_PIN1)
+  {
+    if(beenPressed && butTimeDif  <= 500)
+    {
+      digitalWrite(LED_PIN, HIGH);
+      while(1);
+    }
+
+    limit += 100;
+  }
+  else
+  {
+    if(beenPressed && butTimeDif  <= 500)
+    {
+      digitalWrite(LED_PIN, HIGH);
+      while(1);
+    }
+
+    limit -= 100;
+  }
 }
 
 void timer_expired(void)
 {
   Serial.println("Time expired");
+  digitalWrite(LED_PIN, even);
+  even = !even;
 }
 
 void init_listener(void)
@@ -24,6 +42,9 @@ void init_listener(void)
   pinMode(LED_PIN, OUTPUT);
 
   unsigned long init_time = millis();
-  timer_set(init_time);
+  timer_set(LED_PIN, init_time);
+  even = 0;
+  timeOne = 0;
+  timeTwo = 0;
 }
 
