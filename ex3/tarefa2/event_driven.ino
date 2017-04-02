@@ -27,7 +27,6 @@ void setup ()
   init_listener(); // inicialização do usuário
   oneFlag = 1;
   twoFlag = 1;
-  limit = 1000;
 }
 
 void loop () 

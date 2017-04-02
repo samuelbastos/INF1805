@@ -43,6 +43,7 @@ void init_listener(void)
 
   unsigned long init_time = millis();
   timer_set(LED_PIN, init_time);
+  limit = 1000;
   even = 0;
   timeOne = 0;
   timeTwo = 0;
