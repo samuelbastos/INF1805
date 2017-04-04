@@ -6,15 +6,16 @@ meArm arm;
 Nunchuck  nunchuck;
 bool clawState = false;
 
-void setup() {
+void setup() 
+{
   Serial.begin(9600);
   arm.begin(6, 9, 5, 3);
   nunchuck.begin(NUNCHUCK_PLAYER_1);
   nunchuck.joy_set_scaled_min_max(0, 99, 0 ,99);
 }
 
-void loop() {
-  
+void loop() 
+{
   nunchuck.update();
 
   float dx = 0;
@@ -26,6 +27,7 @@ void loop() {
     dx = -5.0;
   else if (nunchuck.joy_right())
     dx = 5.0;
+
   if (nunchuck.joy_up())
   {
     dy = 5.0;
@@ -36,12 +38,6 @@ void loop() {
     dy = -5.0;
     dz = 5.0;
   }
-    /*
-  if (cc.joy_right_up())
-    dz = 5.0;
-  else if (cc.joy_right_down())
-    dz = -5.0;
-    */
     
   if (nunchuck.button_z())
   {
