@@ -30,8 +30,8 @@ function naimagem (mx, my, x, y, w, h)
 end
 
 function love.load()
-  ret1 = retangulo (50, 200, 200, 150)
-  ret2 = retangulo (50, 100, 200, 150)
+  ret1 = retangulo (50, 100, 200, 150)
+  ret2 = retangulo (50, 400, 200, 150)
 end
 
 function love.keypressed(key)
