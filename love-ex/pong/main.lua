@@ -44,6 +44,7 @@ function newblip (seconds)
         end
         if x > width then
           playerOneScoreValue = playerOneScoreValue + 1
+          difficulty = 1
           x = love.graphics.getWidth()/2
           y = love.graphics.getHeight()/2
           xRandom = 0
@@ -54,6 +55,7 @@ function newblip (seconds)
         end
         if x < 0 then
           playerTwoScoreValue = playerTwoScoreValue + 1
+          difficulty = 1
           x = love.graphics.getWidth()/2
           y = love.graphics.getHeight()/2
           xRandom = 0
