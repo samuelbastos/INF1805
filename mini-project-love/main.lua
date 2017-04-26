@@ -13,15 +13,12 @@ function checkCollission(ball)
   if ball.getBallXCoord() <= playerOne.getPlayerXCoord()+10 and ball.getBallYCoord() >= playerOne.getPlayerYCoord() and ball.getBallYCoord() <= playerOne.getPlayerYCoord()+60 then
     ball.difficulty = ball.difficulty*1.02
     ball.xRandom = -ball.xRandom*ball.difficulty
-  end
-  if ball.getBallXCoord() >= playerTwo.getPlayerXCoord()-10 and ball.getBallYCoord() >= playerTwo.getPlayerYCoord() and ball.getBallYCoord() <= playerTwo.getPlayerYCoord()+60 then
+  elseif ball.getBallXCoord() >= playerTwo.getPlayerXCoord()-10 and ball.getBallYCoord() >= playerTwo.getPlayerYCoord() and ball.getBallYCoord() <= playerTwo.getPlayerYCoord()+60 then
     ball.difficulty = ball.difficulty*1.02
     ball.xRandom = -ball.xRandom*ball.difficulty    
-  end
-  if ball.getBallYCoord() <= 0  or ball.getBallYCoord() >= height-10 then
+  elseif ball.getBallYCoord() <= 0  or ball.getBallYCoord() >= height-10 then
     ball.yRandom = -ball.yRandom
-  end
-  if ball.getBallXCoord() > width then
+  elseif ball.getBallXCoord() > width then
     playerOne.setScore (playerOne.getScore() + 1)
     ball.difficulty = 1
     ball.setBallXCoord(width/2)
@@ -31,8 +28,7 @@ function checkCollission(ball)
       ball.xRandom = 6*love.math.random(-1,1)
     end
     ball.yRandom = love.math.random(-10,10)
-  end
-  if ball.getBallXCoord() < 0 then
+  elseif ball.getBallXCoord() < 0 then
     playerTwo.setScore (playerTwo.getScore() + 1)
     ball.difficulty = 1
     ball.setBallXCoord(width/2)
